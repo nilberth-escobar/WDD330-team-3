@@ -22,14 +22,23 @@ export default class ProductList {
     this.listElement = listElement;
   }
   async init() {
+    const productList = await this.dataSource.getData(this.category);
+    this.renderList(productList)
+    this.counter(productList)
     // our dataSource will return a Promise...so we can use await to resolve it.
     const list = await this.dataSource.getData();
     // render the list
     this.renderList(list);
   }
-  // render after doing the first stretch
-  renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
-  }
+
+  renderList(productList){
+    //filter out bad products before sending to render
+    this.filter(productList);
+    renderListWithTemplate(productCardTemplate, this.listElement, productList, "afterbegin", false);
+}
+
+  showFourTents(list) { // Stretch Activity Step 2
+      return list.filter(function(product){ return product.Id != "989CG" && product.Id != "880RT"});
+  } 
 
 }
