@@ -30,7 +30,7 @@ export default class ProductList {
     // render the list
     this.renderList(list);
   }
-
+  
   renderList(productList){
     //filter out bad products before sending to render
     this.filter(productList);
