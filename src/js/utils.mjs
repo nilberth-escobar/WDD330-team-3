@@ -20,7 +20,7 @@ export function extractParam (param) {
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
   const htmlStrings = list.map(templateFn);
-  //use clear to wipe the element before loading with the template
+  
   if (clear){
     parentElement.innerHTML = "";
   }

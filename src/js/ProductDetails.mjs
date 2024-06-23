@@ -56,7 +56,7 @@ export default class ProductDetailView {
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
     if (element) {
-      element.innerHTML = ""; // Limpia el contenido anterior, si lo hay
+      element.innerHTML = "";
       element.insertAdjacentHTML("afterbegin", generateProductTemplate(this.productData));
     }
   }
