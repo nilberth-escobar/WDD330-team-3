@@ -101,6 +101,7 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
+  text-decoration: none;
 }
 
 .cart svg {
@@ -108,6 +109,65 @@ button {
 }
 .cart:hover svg {
   fill: gray;
+}
+
+/* Cart count styles */
+
+.cart a {
+  text-decoration: none;
+}
+.cart-count {
+  text-decoration: none;
+  text-decoration-style: none;
+  position: relative;
+  top: -10px;
+  right: -10px;
+  background: var(--primary-color);
+  color: var(--tertiary-color);
+  border-radius: 50%;
+  padding: 5px px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  min-height: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-count {
+  background-image: linear-gradient(
+    to right,
+    #f0a868,
+    #f0a868 50%,
+    #eff7f6 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+
+  position: relative;
+  transition: background-position 0.3s ease-in-out;
+}
+
+.cart-count:before {
+  content: "";
+  background: #020122;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: width 0.3s ease-in-out;
+}
+
+.cart-count:hover {
+  background-position: 0;
+}
+
+.cart-count:hover:before {
+  width: 100%;
 }
 
 /* End cart icon styles */
