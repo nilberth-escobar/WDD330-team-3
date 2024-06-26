@@ -36,6 +36,8 @@ function cartItemTemplate(item) {
   </li>`;
 }
 
+//total
+
 function calculateTotalPrice(items) {
   return items.reduce(
     (total, item) => total + item.FinalPrice * item.quantity,
