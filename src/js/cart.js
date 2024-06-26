@@ -8,11 +8,16 @@ function renderCartContents() {
   }
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const productList = document.querySelector(".product-list");
+  if (productList && productList.classList.contains("cart-list")) {
+    productList.innerHTML = htmlItems.join("");
 
-  const totalPrice = calculateTotalPrice(cartItems);
-  document.querySelector(".total-price").innerText =
-    `Total Price: $${totalPrice.toFixed(2)}`;
+    const totalPriceElement = document.querySelector(".total-price");
+    if (totalPriceElement) {
+      const totalPrice = calculateTotalPrice(cartItems);
+      totalPriceElement.innerText = `Total Price: $${totalPrice.toFixed(2)}`;
+    }
+  }
 
   updateCartCount();
 }
@@ -34,11 +39,19 @@ function calculateTotalPrice(items) {
   return items.reduce((total, item) => total + item.FinalPrice, 0);
 }
 
-const cartCount = document.querySelector(".cart-count");
-cartCount.innerText = getLocalStorage("so-cart").length;
-
 function updateCartCount() {
-  cartCount.innerText = getLocalStorage("so-cart").length;
+  const cartCount = document.querySelector(".cart-count");
+  const cartItems = getLocalStorage("so-cart") || [];
+  if (cartCount) {
+    cartCount.innerText = cartItems.length;
+  }
 }
 
-renderCartContents();
+updateCartCount();
+
+if (
+  document.querySelector(".product-list") &&
+  document.querySelector(".product-list").classList.contains("cart-list")
+) {
+  renderCartContents();
+}
