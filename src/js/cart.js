@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   let cartItems = getLocalStorage("so-cart");
@@ -30,20 +30,26 @@ function cartItemTemplate(item) {
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
     </a>
-    <p class="cart-card__quantity">qty: 1</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <p class="cart-card__quantity">qty: ${item.quantity}</p>
+    <p class="cart-card__price">$${(item.FinalPrice * item.quantity).toFixed(2)}</p>
   </li>`;
 }
 
 function calculateTotalPrice(items) {
-  return items.reduce((total, item) => total + item.FinalPrice, 0);
+  return items.reduce(
+    (total, item) => total + item.FinalPrice * item.quantity,
+    0,
+  );
 }
 
 function updateCartCount() {
   const cartCount = document.querySelector(".cart-count");
   const cartItems = getLocalStorage("so-cart") || [];
   if (cartCount) {
-    cartCount.innerText = cartItems.length;
+    cartCount.innerText = cartItems.reduce(
+      (count, item) => count + item.quantity,
+      0,
+    );
   }
 }
 

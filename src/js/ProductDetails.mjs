@@ -1,4 +1,4 @@
-import { setLocalStorage , getLocalStorage} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 function generateProductTemplate(product) {
   return `
@@ -31,25 +31,33 @@ export default class ProductDetailView {
 
   async initialize() {
     try {
-    this.productData = await this.dataSource.findProductById(this.productId);
-    this.renderProductDetails("main");
-    if (!this.productData) {
-      throw new Error(`Product with ID ${this.productId} not found`);
+      this.productData = await this.dataSource.findProductById(this.productId);
+      this.renderProductDetails("main");
+      if (!this.productData) {
+        throw new Error(`Product with ID ${this.productId} not found`);
+      }
+      document
+        .getElementById("addToCart")
+        .addEventListener("click", this.addToCart.bind(this));
+    } catch (error) {
+      console.error("Error initializing ProductDetails:", error);
     }
-    document
-    .getElementById("addToCart")
-    .addEventListener("click", this.addToCart.bind(this));
-  }catch (error) {
-    return ("Error intializing ProduckDetails:", error);
   }
- }  
 
   addToCart() {
     let currentCart = getLocalStorage("so-cart") || [];
     if (!Array.isArray(currentCart)) {
       currentCart = [currentCart];
     }
-    currentCart.push(this.productData);
+    
+    const existingItemIndex = currentCart.findIndex(item => item.Id === this.productData.Id);
+    if (existingItemIndex > -1) {
+      currentCart[existingItemIndex].quantity += 1;
+    } else {
+      this.productData.quantity = 1;
+      currentCart.push(this.productData);
+    }
+
     setLocalStorage("so-cart", currentCart);
   }
 
@@ -60,6 +68,4 @@ export default class ProductDetailView {
       element.insertAdjacentHTML("afterbegin", generateProductTemplate(this.productData));
     }
   }
-
-  
 }
