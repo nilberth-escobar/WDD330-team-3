@@ -1,10 +1,11 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
+
 function productCardTemplate(product) {
   return `<li class="product-card">
-  <a href="product_pages/index.html?product=${product.Id}">
+  <a href="/product_pages/index.html?product=${product.Id}">
   <img
-    src="${product.Image}"
+    src="${product.Images.PrimaryMedium}"
     alt="Image of ${product.Name}"
   />
   <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -13,27 +14,22 @@ function productCardTemplate(product) {
 </li>`;
 }
 
-export default class ProductList {
+export default class ProductListing {
   constructor(category, dataSource, listElement) {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
   }
+
   async init() {
-    const productList = await this.dataSource.getData(this.category);
-    this.renderList(productList)
-    this.counter(productList)
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
+    document.querySelector(".title").innerHTML = this.category;
   }
-  
-  renderList(productList){
-    this.filter(productList);
-    renderListWithTemplate(productCardTemplate, this.listElement, productList, "afterbegin", false);
-}
 
-  showFourTents(list) {
-      return list.filter(function(product){ return product.Id != "989CG" && product.Id != "880RT"});
-  } 
-
+  renderList(list) {
+    list.splice(2,1);
+    list.splice(3,1);
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
 }

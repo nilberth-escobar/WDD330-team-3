@@ -9,6 +9,14 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
+// helper to get parameter strings
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product;
+}
+
 export function extractParam (param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
