@@ -24,7 +24,7 @@ export function extractParam (param) {
   console.log(product);
   console.log(urlParams);
   return product;
-}
+} 
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
   const htmlStrings = list.map(templateFn);
