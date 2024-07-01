@@ -110,10 +110,10 @@ function updateQuantity(productId, change) {
     cartItems = [cartItems];
   }
 
-  const item = cartItems.find((item) => item.Id === productId);
-  if (item) {
-    item.quantity += change;
-    if (item.quantity < 1) {
+  const cartItem = cartItems.find((item) => item.Id === productId);
+  if (cartItem) {
+    cartItem.quantity += change;
+    if (cartItem.quantity < 1) {
       removeItemFromCart(productId);
     } else {
       setLocalStorage("so-cart", cartItems);
