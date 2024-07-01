@@ -327,6 +327,23 @@ button {
   grid-column: 3;
 }
 
+.sort-buttons {
+  margin-bottom: 1rem;
+}
+
+.sort-buttons button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #7b4040;
+  border: 1px solid #a73c3c;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sort-buttons button:hover {
+  background-color: #a71515;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
