@@ -5,7 +5,7 @@ document.getElementById("search-form").addEventListener("submit", function(event
 });
 
 function searchProducts(query) {
-    const apiUrl = "https://api/1.0/products?search=${encodeURIComponent(query)}";
+    const apiUrl = "https://api/1.0/products/";
 
     fetch(apiUrl)
         .then(response => {
@@ -42,9 +42,4 @@ function displayProducts(products) {
 
         productList.appendChild(productItem);
     });
-}
-
-function displayError(message) {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = `<p>${message}</p>`;
 }
