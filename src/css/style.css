@@ -344,6 +344,42 @@ button {
   background-color: #a71515;
 }
 
+/* checkout button */
+
+.checkout-button {
+  display: block;
+  margin: auto auto 15px;
+  width: 10rem;
+  background-color: #525b0f;
+  padding: 5px;
+  text-align: center;
+}
+
+.checkout-button a {
+  text-decoration: none;
+  color: white;
+  padding: auto auto 50px;
+}
+
+/* checkout form styles */
+
+form fieldset,
+form fieldset div,
+.checkout__name,
+.checkout__address {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+}
+
+.formbtn {
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* end checkout form styles */
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
